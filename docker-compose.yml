@@ -1,0 +1,23 @@
+version: "2.4"
+services:
+  go-mock:
+    image: ${IMG_NAME}
+    container_name: ${NAME}_${VERSION}
+    ports:
+      - ${PORT}:8080
+    volumes:
+      - ./resources:/usr/local/app/resources
+    restart: on-failure
+    networks:
+      - go-mock-network
+    logging:
+      driver: json-file
+      options:
+        max-size: "${LOG_MAX_SIZE}"
+        max-file: "${LOG_MAX_FILES}"
+    command: ./server-lin.exe
+    mem_limit: ${CONTAINER_MAX_MEMORY}
+    memswap_limit: ${CONTAINER_MAX_SWAP_MEMORY}
+
+networks:
+  go-mock-network:

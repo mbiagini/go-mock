@@ -1,0 +1,98 @@
+{
+  "port": 8080,
+  "basepath": "/go-mock/v1",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "default_response_id": 0,
+      "responses": [
+        {
+          "id": 0,
+          "code": 200
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "default_response_id": 0,
+      "has_discriminator": true,
+      "discriminator": {
+        "parameter": "with_error",
+        "location": "QUERY",
+        "conditions": [
+          {
+            "value": "false",
+            "response_id": 0
+          },
+          {
+            "value": "true",
+            "response_id": 1
+          }
+        ]
+      },
+      "responses": [
+        {
+          "id": 0,
+          "code": 200,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_users_0_200.json",
+          "delay": 0
+        },
+        {
+          "id": 1,
+          "code": 500,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_users_1_500.json",
+          "delay": 500
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "responses": [
+        {
+          "code": 201
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{id}",
+      "default_response_id": 0,
+      "has_discriminator": true,
+      "discriminator": {
+        "parameter": "id",
+        "location": "PATH",
+        "conditions": [
+          {
+            "value": "0",
+            "response_id": 0
+          },
+          {
+            "value": "a",
+            "response_id": 1
+          }
+        ]
+      },
+      "responses": [
+        {
+          "id": 0,
+          "code": 200,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_user_0_200.json",
+          "delay": 0
+        },
+        {
+          "id": 1,
+          "code": 400,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_user_1_400.json",
+          "delay": 500
+        }
+      ]
+    }
+  ]
+}
