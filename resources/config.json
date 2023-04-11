@@ -1,7 +1,21 @@
 {
+  "ip": "127.0.0.1",
   "port": 8080,
   "basepath": "/go-mock/v1",
   "endpoints": [
+    {
+      "method": "POST",
+      "path": "/soap",
+      "responses": [
+        {
+          "id": 0,
+          "code": 200,
+          "content_type": "text/xml",
+          "body_filename": "./resources/responses/soap_get_users_0_200.xml",
+          "delay": 0
+        }
+      ]
+    },
     {
       "method": "GET",
       "path": "/health",

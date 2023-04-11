@@ -37,6 +37,7 @@ type Endpoint struct {
 }
 
 type Config struct {
+	Ip        string     `json:"ip"`
 	Port      int        `json:"port"`
 	Basepath  string     `json:"basepath"`
 	Endpoints []Endpoint `json:"endpoints"`
@@ -48,6 +49,7 @@ func init() {
 
 	// Default values.
 	Conf = &Config{
+		Ip:       "",
 		Port:     8080,
 		Basepath: "/",
 	}

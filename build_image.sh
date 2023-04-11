@@ -1,4 +1,4 @@
-VERSION=1.0.0
+VERSION=1.1.0
 APP_NAME=go-mock
 
 docker rmi      localhost:5000/${APP_NAME}:${VERSION}

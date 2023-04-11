@@ -1,23 +1,47 @@
 package main
 
 import (
+	"context"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/go-chi/chi/v5"
 )
 
 func main() {
+	quit := make(chan interface{})
+	httpServerExitDone := &sync.WaitGroup{}
+	httpServerExitDone.Add(1)
+
+	srv := startServer(httpServerExitDone, quit)
+
+	<-quit
+	log.Println("main: shutting down")
+	if err := srv.Shutdown(context.TODO()); err != nil {
+		panic(err)
+	}
+
+	// wait for goroutine started in startServer() to stop
+	httpServerExitDone.Wait()
+
+	log.Println("main: done. exiting")
+}
+
+func startServer(wg *sync.WaitGroup, quit chan interface{}) *http.Server {
 
 	r := chi.NewRouter()
 
 	// Initialize routes.
 	log.Println("Initializing routes")
 	r.Route(Conf.Basepath, func(r chi.Router) {
+		r.MethodFunc("POST", "/shutdown", func(w http.ResponseWriter, r *http.Request) {
+			close(quit)
+		})
 		for _, ep := range Conf.Endpoints {
 			r.MethodFunc(ep.Method, ep.Path, addRoute(ep))
 		}
@@ -35,7 +59,17 @@ func main() {
 
 	// Start server.
 	log.Println("Starting server")
-	http.ListenAndServe(":" + strconv.Itoa(Conf.Port), r)
+	srv := &http.Server{Addr: Conf.Ip + ":" + strconv.Itoa(Conf.Port), Handler: r}
+	go func() {
+		defer wg.Done() // let main know we are done cleaning up.
+
+		if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+			// unexpected error.
+			log.Fatalf("ListenAndServe(): %v", err)
+		}
+	}()
+
+	return srv
 }
 
 func addRoute(ep Endpoint) func(http.ResponseWriter, *http.Request) {

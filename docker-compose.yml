@@ -7,7 +7,7 @@ services:
       - ${PORT}:8080
     volumes:
       - ./resources:/usr/local/app/resources
-    restart: on-failure
+    restart: always
     networks:
       - go-mock-network
     logging:

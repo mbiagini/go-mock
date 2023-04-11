@@ -1,0 +1,9 @@
+<Envelope>
+    <Body>
+        <user>
+            <id>1</id>
+            <name>Martín</name>
+            <surname>Biagini</surname>
+        </user>
+    </Body>
+</Envelope>
