@@ -4,11 +4,23 @@ Este servicio permite desplegar mocks fácilmente configurables definidos a trav
 
 ## Instrucciones de uso
 
-### Sin build
+### Ejecutables
 
-En un servidor/pc que tenga docker instalado, correr los siguientes comandos:
+En el directorio base del repositorio están los ejecutables zerver_lin.exe y zerver_win.exe. Cada uno puede ser ejecutado desde el SO correspondiente (ambos fueron compilados para una arquitectura de 64-bit).
 
-- ./build_image.sh
-- ./run_container.sh
+### Compilación
 
-Esto dejará corriendo el mock en el puerto especificado en el archivo .env y con el basepath indicado en el archivo config.json de configuración.
+Si se realizó alguna modificación al código (a cargo de cada desarrollador), se puede volver a compilar para generar los ejecutables corriendo el script "server_compile.sh" que se encuentra en el directorio principal.
+
+### Docker
+
+En el directorio "docker" se encuentran todos los archivos necesarios para hacer el build de la imagen Docker (script "build_image.sh") y, luego, levantar un container que utilice la misma (script "run_container.sh"). Dependiendo de dónde vaya a utilizar estos archivos (localmente o en un servidor), se debe configurar el archivo ".env" acordemente.
+
+## Próximos pasos (v1.2.0):
+
+1. Agregar documentación para el agregado de endpoints al mock. Considerar agregar un .docx o un swagger con un endpoint POST para simular el agregado de un nuevo endpoint y documentarlo allí.
+2. Agregar validación de la configuración de forma automática y completa utilizando la librería gslog.
+3. Permitir configurar una política de balanceo entre las respuestas, es decir, que no se utilice un "discriminator" sino que se elija qué respuesta devolver según una política, ignorando el input recibido.
+   1. Permitir balancear por round-robin.
+   2. Permitir balancear por porcentajes.
+   3. Permitir balancear random (a definir).

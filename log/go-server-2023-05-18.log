@@ -1,0 +1,11 @@
+[server/2023-05-18T03:02:17.328] Initializing routes
+[server/2023-05-18T03:02:17.362] Initializing user defined routes
+[server/2023-05-18T03:02:17.366] Initializing server routes
+[server/2023-05-18T03:02:17.370] Printing routes
+[server/2023-05-18T03:02:17.375] [POST]: '/go-mock/v1/soap'
+[server/2023-05-18T03:02:17.380] [POST]: '/go-mock/v1/users'
+[server/2023-05-18T03:02:17.384] [GET]: '/go-mock/v1/users'
+[server/2023-05-18T03:02:17.387] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-18T03:02:17.392] [POST]: '/shutdown'
+[server/2023-05-18T03:02:17.396] Starting server
+[server/2023-05-18T03:02:37.677] no matching condition found for parameter age in endpoint [method: POST, path: /users]

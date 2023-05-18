@@ -1,8 +1,39 @@
 {
-  "ip": "127.0.0.1",
-  "port": 8080,
+  "ip": "",
+  "port": 8081,
   "basepath": "/go-mock/v1",
   "endpoints": [
+    {
+      "method": "POST",
+      "path": "/users",
+      "standard": "REST",
+      "default_response_id": 0,
+      "has_discriminator": true,
+      "discriminator": {
+        "parameter": "age",
+        "location": "BODY",
+        "conditions": [
+          {
+            "regexp": "^[1-9]?[0-9]{1}$|^100$",
+            "response_id": 1
+          }
+        ]
+      },
+      "responses": [
+        {
+          "id": 0,
+          "code": 200,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_user_0_200.json"
+        },
+        {
+          "id": 1,
+          "code": 200,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_user_1_200.json"
+        }
+      ]
+    },
     {
       "method": "POST",
       "path": "/soap",
@@ -18,17 +49,6 @@
     },
     {
       "method": "GET",
-      "path": "/health",
-      "default_response_id": 0,
-      "responses": [
-        {
-          "id": 0,
-          "code": 200
-        }
-      ]
-    },
-    {
-      "method": "GET",
       "path": "/users",
       "default_response_id": 0,
       "has_discriminator": true,
@@ -37,11 +57,11 @@
         "location": "QUERY",
         "conditions": [
           {
-            "value": "false",
+            "regexp": "false",
             "response_id": 0
           },
           {
-            "value": "true",
+            "regexp": "true",
             "response_id": 1
           }
         ]
@@ -64,15 +84,6 @@
       ]
     },
     {
-      "method": "POST",
-      "path": "/users",
-      "responses": [
-        {
-          "code": 201
-        }
-      ]
-    },
-    {
       "method": "GET",
       "path": "/users/{id}",
       "default_response_id": 0,
@@ -82,11 +93,15 @@
         "location": "PATH",
         "conditions": [
           {
-            "value": "0",
+            "regexp": "0",
             "response_id": 0
           },
           {
-            "value": "a",
+            "regexp": "1",
+            "response_id": 2
+          },
+          {
+            "regexp": "a",
             "response_id": 1
           }
         ]
@@ -103,7 +118,14 @@
           "id": 1,
           "code": 400,
           "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_1_400.json",
+          "body_filename": "./resources/responses/get_user_a_400.json",
+          "delay": 500
+        },
+        {
+          "id": 2,
+          "code": 200,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/get_user_1_200.json",
           "delay": 500
         }
       ]

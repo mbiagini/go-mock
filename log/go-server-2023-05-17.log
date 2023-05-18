@@ -1,0 +1,69 @@
+[server/2023-05-17T20:35:59.373] Initializing routes
+Initializing routes
+[server/2023-05-17T20:35:59.376] Printing routes
+[server/2023-05-17T20:35:59.376] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:35:59.376] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:35:59.376] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:35:59.377] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:35:59.378] [POST]: '/shutdown'
+[server/2023-05-17T20:35:59.379] Starting server
+[server/2023-05-17T20:41:02.018] Initializing routes
+[server/2023-05-17T20:41:02.020] Initializing server routes
+[server/2023-05-17T20:41:02.020] Initializing user defined routes
+[server/2023-05-17T20:41:02.021] Printing routes
+[server/2023-05-17T20:41:02.021] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:41:02.022] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:41:02.022] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:41:02.022] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:41:02.023] [POST]: '/shutdown'
+[server/2023-05-17T20:41:02.023] Starting server
+[server/2023-05-17T20:43:17.337] Initializing routes
+[server/2023-05-17T20:43:17.338] Initializing user defined routes
+[server/2023-05-17T20:43:17.339] Initializing server routes
+[server/2023-05-17T20:43:17.339] Printing routes
+[server/2023-05-17T20:43:17.339] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:43:17.340] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:43:17.340] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:43:17.340] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:43:17.340] [POST]: '/shutdown'
+[server/2023-05-17T20:43:17.341] Starting server
+[server/2023-05-17T20:53:09.516] Initializing routes
+[server/2023-05-17T20:53:09.517] Initializing user defined routes
+[server/2023-05-17T20:53:09.518] Initializing server routes
+[server/2023-05-17T20:53:09.518] Printing routes
+[server/2023-05-17T20:53:09.518] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:53:09.519] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:53:09.519] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:53:09.519] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:53:09.520] [POST]: '/shutdown'
+[server/2023-05-17T20:53:09.520] Starting server
+[server/2023-05-17T20:54:35.391] Initializing routes
+[server/2023-05-17T20:54:35.392] Initializing user defined routes
+[server/2023-05-17T20:54:35.392] Initializing server routes
+[server/2023-05-17T20:54:35.393] Printing routes
+[server/2023-05-17T20:54:35.393] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:54:35.393] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:54:35.394] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:54:35.394] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:54:35.395] [POST]: '/shutdown'
+[server/2023-05-17T20:54:35.395] Starting server
+[server/2023-05-17T20:54:44.228] Initializing routes
+[server/2023-05-17T20:54:44.229] Initializing user defined routes
+[server/2023-05-17T20:54:44.229] Initializing server routes
+[server/2023-05-17T20:54:44.229] Printing routes
+[server/2023-05-17T20:54:44.229] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:54:44.230] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:54:44.230] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:54:44.230] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:54:44.231] [POST]: '/shutdown'
+[server/2023-05-17T20:54:44.231] Starting server
+[server/2023-05-17T20:57:13.735] Initializing routes
+[server/2023-05-17T20:57:13.736] Initializing user defined routes
+[server/2023-05-17T20:57:13.736] Initializing server routes
+[server/2023-05-17T20:57:13.736] Printing routes
+[server/2023-05-17T20:57:13.736] [POST]: '/go-mock/v1/soap'
+[server/2023-05-17T20:57:13.737] [POST]: '/go-mock/v1/users'
+[server/2023-05-17T20:57:13.737] [GET]: '/go-mock/v1/users'
+[server/2023-05-17T20:57:13.737] [GET]: '/go-mock/v1/users/{id}'
+[server/2023-05-17T20:57:13.737] [POST]: '/shutdown'
+[server/2023-05-17T20:57:13.738] Starting server

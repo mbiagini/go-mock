@@ -1,3 +1,10 @@
-# github.com/go-chi/chi/v5 v5.0.7
+# github.com/go-chi/chi/v5 v5.0.8
 ## explicit; go 1.14
 github.com/go-chi/chi/v5
+# github.com/mbiagini/go-server-utils v1.0.0
+## explicit; go 1.18
+github.com/mbiagini/go-server-utils/gslog
+github.com/mbiagini/go-server-utils/gsrender
+# gopkg.in/natefinch/lumberjack.v2 v2.2.1
+## explicit; go 1.13
+gopkg.in/natefinch/lumberjack.v2
