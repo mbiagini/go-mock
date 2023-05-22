@@ -1,15 +1,11 @@
 package model
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/mbiagini/go-server-utils/gslog"
-
-	"github.com/go-chi/chi/v5"
 )
 
 type HttpMethod string
@@ -32,13 +28,12 @@ const (
 )
 
 type Endpoint struct {
-	Method              HttpMethod     `json:"method"`
-	Path                string         `json:"path"`
-	Standard            *Standard      `json:"standard"`
-	HasDiscriminator    bool           `json:"has_discriminator"`
-	DefaultResponseId   int            `json:"default_response_id"`	
-	Discriminator       *Discriminator `json:"discriminator"`
-	Responses           []Response     `json:"responses"`
+	Method              HttpMethod      `json:"method"`
+	Path                string          `json:"path"`
+	Standard            *Standard       `json:"standard"`
+	DefaultResponseId   int             `json:"default_response_id"`	
+	Discriminators      []Discriminator `json:"discriminators"`
+	Responses           []Response      `json:"responses"`
 }
 
 func ValidateEndpoints(es []Endpoint) error {
@@ -64,13 +59,12 @@ func (e *Endpoint) Validate() error {
 	if len(e.Responses) == 0 {
 		return fmt.Errorf("endpoint %s has no responses", e.ToString())
 	}
-	if e.HasDiscriminator {
-		if e.Discriminator == nil {
-			return fmt.Errorf("endpoint %s specifies it uses a discriminator but none found", e.ToString())
-		}
-		err := e.Discriminator.Validate(e.Responses, e.Standard)
-		if err != nil {
-			return fmt.Errorf("error in endpoint %s: %s", e.ToString(), err.Error())
+	if len(e.Discriminators) != 0 {
+		for _, d := range e.Discriminators {
+			err := d.Validate(e.Responses, e.Standard)
+			if err != nil {
+				return fmt.Errorf("error in endpoint %s: %s", e.ToString(), err.Error())
+			}
 		}
 	}
 	for _, r := range e.Responses {
@@ -92,58 +86,30 @@ func (e *Endpoint) GetDefaultResponse() (*Response, error) {
 
 func (e *Endpoint) FindResponse(r *http.Request) (*Response, error) {
 
-	if !e.HasDiscriminator {
+	if len(e.Discriminators) == 0 {
 		return e.GetDefaultResponse()
 	}
 
-	d := e.Discriminator
+	respId := e.DefaultResponseId
 
-	pValue := ""
-	switch d.Location {
-	case PATH:
-		pValue = chi.URLParam(r, d.Parameter)
-	case QUERY:
-		pValue = r.URL.Query().Get(d.Parameter)
-	case HEADER:
-		pValue = r.Header.Get(d.Parameter)
-	case BODY:
-		dataBytes, err := ioutil.ReadAll(r.Body)
+	for _, d := range e.Discriminators {
+
+		id, err := d.FindResponseId(r)
 		if err != nil {
-			return nil, fmt.Errorf("error reading request's body for endpoint %s: %s", e.ToString(), err.Error())
+			gslog.Server(fmt.Sprintf("error analyzing request for endpoint %s: %s", e.ToString(), err.Error()))
 		}
-		var data interface{}
-		if err := json.Unmarshal(dataBytes, &data); err != nil {
-			return nil, fmt.Errorf("error unmarshaling request's body for endpoint %s: %s", e.ToString(), err.Error())
+
+		// end loop when discriminator condition matches.
+		if id != nil {
+			respId = *id
+			break
 		}
-		c, err := GetMatchingConditionFromStruct(d.Conditions, data, d.Parameter)
-		if err != nil {
-			return nil, fmt.Errorf("error matching conditions for endpoint %s: %s", e.ToString(), err.Error())
-		}
-		if c == nil {
-			gslog.Server(fmt.Sprintf("no matching condition found for parameter %s in endpoint %s", d.Parameter, e.ToString()))
-			return e.GetDefaultResponse()
-		}
-		resp, ok := GetResponseById(e.Responses, c.ResponseId)
-		if !ok {
-			return nil, fmt.Errorf("matched endpoint %s with condition %s but no response found for it", e.ToString(), c.ToString())
-		}
-		return resp, nil
 
 	}
 
-	if pValue == "" {
-		return nil, fmt.Errorf("discriminator parameter %s not found in location %s", d.Parameter, d.Location)
-	}
-
-	c, ok := GetMatchingCondition(d.Conditions, pValue)
+	resp, ok := GetResponseById(e.Responses, respId)
 	if !ok {
-		gslog.Server(fmt.Sprintf("no matching condition found for parameter value %s in endpoint %s", pValue, e.ToString()))
-		return e.GetDefaultResponse()
-	}
-
-	resp, ok := GetResponseById(e.Responses, c.ResponseId)
-	if !ok {
-		return nil, fmt.Errorf("matched endpoint %s with condition %s but no response found for it", e.ToString(), c.ToString())
+		return nil, fmt.Errorf("matched endpoint %s with responseId %d but no response found for it", e.ToString(), respId)
 	}
 
 	return resp, nil

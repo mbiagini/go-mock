@@ -1,0 +1,6 @@
+{
+  "code": 5001,
+  "message": "Unrecognized internal error. Please contact support team",
+  "friendly_message": "Ocurrió un error inesperado. Intente más tarde",
+  "remaining_tries": 3
+}

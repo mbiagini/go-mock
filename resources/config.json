@@ -1,132 +1,88 @@
 {
-  "ip": "",
+  "ip": "127.0.0.1",
   "port": 8081,
   "basepath": "/go-mock/v1",
   "endpoints": [
     {
       "method": "POST",
-      "path": "/users",
+      "path": "/validate",
       "standard": "REST",
       "default_response_id": 0,
       "has_discriminator": true,
-      "discriminator": {
-        "parameter": "age",
-        "location": "BODY",
-        "conditions": [
-          {
-            "regexp": "^[1-9]?[0-9]{1}$|^100$",
-            "response_id": 1
-          }
-        ]
-      },
+      "discriminators": [
+        {
+          "parameter": "document_number",
+          "location": "BODY",
+          "conditions": [
+            {
+              "regexp": "^38100101$",
+              "response_id": 1
+            },
+            {
+              "regexp": "^38100102$",
+              "response_id": 2
+            },
+            {
+              "regexp": "^38100103$",
+              "response_id": 3
+            },
+            {
+              "regexp": "^38100104$",
+              "response_id": 4
+            },
+            {
+              "regexp": "^38100105$",
+              "response_id": 5
+            },
+            {
+              "regexp": "^38100106$",
+              "response_id": 6
+            }
+          ]
+        }
+      ],
       "responses": [
         {
           "id": 0,
           "code": 200,
           "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_0_200.json"
+          "body_filename": "./resources/responses/renaper_0_200.json"
         },
         {
           "id": 1,
-          "code": 200,
+          "code": 403,
           "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_1_200.json"
-        }
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/soap",
-      "responses": [
-        {
-          "id": 0,
-          "code": 200,
-          "content_type": "text/xml",
-          "body_filename": "./resources/responses/soap_get_users_0_200.xml",
-          "delay": 0
-        }
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/users",
-      "default_response_id": 0,
-      "has_discriminator": true,
-      "discriminator": {
-        "parameter": "with_error",
-        "location": "QUERY",
-        "conditions": [
-          {
-            "regexp": "false",
-            "response_id": 0
-          },
-          {
-            "regexp": "true",
-            "response_id": 1
-          }
-        ]
-      },
-      "responses": [
-        {
-          "id": 0,
-          "code": 200,
-          "content_type": "application/json",
-          "body_filename": "./resources/responses/get_users_0_200.json",
-          "delay": 0
-        },
-        {
-          "id": 1,
-          "code": 500,
-          "content_type": "application/json",
-          "body_filename": "./resources/responses/get_users_1_500.json",
-          "delay": 500
-        }
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/users/{id}",
-      "default_response_id": 0,
-      "has_discriminator": true,
-      "discriminator": {
-        "parameter": "id",
-        "location": "PATH",
-        "conditions": [
-          {
-            "regexp": "0",
-            "response_id": 0
-          },
-          {
-            "regexp": "1",
-            "response_id": 2
-          },
-          {
-            "regexp": "a",
-            "response_id": 1
-          }
-        ]
-      },
-      "responses": [
-        {
-          "id": 0,
-          "code": 200,
-          "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_0_200.json",
-          "delay": 0
-        },
-        {
-          "id": 1,
-          "code": 400,
-          "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_a_400.json",
-          "delay": 500
+          "body_filename": "./resources/responses/renaper_1_403_blocked.json"
         },
         {
           "id": 2,
-          "code": 200,
+          "code": 403,
           "content_type": "application/json",
-          "body_filename": "./resources/responses/get_user_1_200.json",
-          "delay": 500
+          "body_filename": "./resources/responses/renaper_2_403_blocked_dead.json"
+        },
+        {
+          "id": 3,
+          "code": 403,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/renaper_3_403_blocked_age.json"
+        },
+        {
+          "id": 4,
+          "code": 403,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/renaper_4_403_failed.json"
+        },
+        {
+          "id": 5,
+          "code": 400,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/renaper_5_400.json"
+        },
+        {
+          "id": 6,
+          "code": 500,
+          "content_type": "application/json",
+          "body_filename": "./resources/responses/renaper_6_500.json"
         }
       ]
     }

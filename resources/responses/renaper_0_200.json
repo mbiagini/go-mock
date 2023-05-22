@@ -1,0 +1,27 @@
+{
+  "document": {
+    "number": "38845599",
+    "sex": "M",
+    "names": "Homero Abraham",
+    "last_names": "Simposon",
+    "birthdate": "01/01/1900",
+    "copy": "A",
+    "expiration_date": "03/07/2032",
+    "creation_date": "03/07/2017",
+    "cuil": "0",
+    "address": {
+      "country": "Argentina",
+      "nationality": "Argentina",
+      "born_in": "Argentina",
+      "province": "Buenos Aires",
+      "city": "San Fernando",
+      "municipality": "San Fernando",
+      "department": "SIN_INFORMAR",
+      "zip_code": "1646",
+      "street_address": "Av. Libertador",
+      "street_number": "1923",
+      "floor": "4"
+    }
+  },
+  "remaining_tries": 3
+}

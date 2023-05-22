@@ -1,0 +1,6 @@
+{
+  "code": 3003,
+  "message": "User is blocked for it used all available tries and failed",
+  "friendly_message": "Usuario bloqueado ya que superó la máxima cantidad de intentos disponibles",
+  "remaining_tries": 0
+}

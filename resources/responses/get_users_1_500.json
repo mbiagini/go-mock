@@ -1,5 +1,0 @@
-{
-  "code": "2001",
-  "label": "DB_CONNECTION_ERROR",
-  "message": "Could not retrieve entities from DB. Please contact support team"
-}

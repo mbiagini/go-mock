@@ -1,1 +1,1 @@
-go run ../main.go ../config.go ../router.go
+go run ./main.go ./config.go ./router.go

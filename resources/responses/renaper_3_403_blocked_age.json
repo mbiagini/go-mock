@@ -1,0 +1,6 @@
+{
+  "code": 3005,
+  "message": "User is blocked caused by its age being out of valid range",
+  "friendly_message": "Usuario bloqueado ya que su edad está fuera del rango válido",
+  "remaining_tries": 0
+}

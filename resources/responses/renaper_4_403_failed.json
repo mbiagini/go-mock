@@ -1,0 +1,12 @@
+{
+  "code": 3002,
+  "message": "Nomination with Renaper failed",
+  "friendly_message": "Error de validación. Por favor, revise los datos ingresados",
+  "remaining_tries": 2,
+  "external": {
+    "source": "APIGW_RENAPER",
+    "status": 500,
+    "code": "5001",
+    "message": "Internal Server Error"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "code": 3004,
+  "message": "User is blocked caused by deceased person",
+  "friendly_message": "Usuario bloqueado ya que aparece como fallecido en Renaper",
+  "remaining_tries": 0
+}

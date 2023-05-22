@@ -1,0 +1,6 @@
+{
+  "code": 4001,
+  "message": "Validation failed for received parameter value",
+  "friendly_message": "Se recibió un parámetro inválido. Por favor, revise los datos ingresados",
+  "remaining_tries": 3
+}
