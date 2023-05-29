@@ -1,6 +1,6 @@
 BASE_REPOSITORY=localhost:5000
 APP_NAME=go-mock
-VERSION=1.1.1
+VERSION=2.0.0
 
 cd ..
 ./server_compile.sh

@@ -1,0 +1,5 @@
+{
+  "ip": "",
+  "port": 8081,
+  "basepath": "/identity-validation/v1"
+}

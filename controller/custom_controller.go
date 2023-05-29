@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"go-mock/model"
+	"go-mock/service"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -12,7 +13,7 @@ import (
 
 func HandleRequest(w http.ResponseWriter, r *http.Request, e model.Endpoint) {
 
-	resp, err := e.FindResponse(r)
+	resp, err := service.FindEndpointResponseFromRequest(e, r)
 	if err != nil {
 		gsrender.WriteJSON(w, http.StatusInternalServerError, model.ErrorFrom(err))
 		return
@@ -24,7 +25,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request, e model.Endpoint) {
 
 	if resp.HasBody() {
 		w.Header().Set("Content-type", *resp.ContentType)
-		w.WriteHeader(resp.Code)
+		w.WriteHeader(*resp.Code)
 		buf, err := readFile(*resp.BodyFilename)
 		if err != nil {
 			gsrender.WriteJSON(w, http.StatusInternalServerError, model.ErrorFrom(err))
@@ -32,7 +33,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request, e model.Endpoint) {
 		}
 		w.Write(buf)
 	} else {
-		w.WriteHeader(resp.Code)
+		w.WriteHeader(*resp.Code)
 	}
 
 }

@@ -1,3 +1,8 @@
 .vscode/
 log/
 *.tar
+resources/db.json
+resources/responses/
+docker/log/
+docker/resources/db.json
+docker/resources/responses/

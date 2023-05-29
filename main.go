@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-mock/model"
 	"net/http"
 	"os"
 	"strconv"
@@ -23,11 +22,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = model.ValidateEndpoints(Conf.Endpoints)
-	if err != nil {
-		gslog.Server(err.Error())
-		os.Exit(1)
-	}
+	//err = model.ValidateEndpoints(Conf.Endpoints)
+	//if err != nil {
+	//	gslog.Server(err.Error())
+	//	os.Exit(1)
+	//}
 
 	quit := make(chan interface{})
 	httpServerExitDone := &sync.WaitGroup{}

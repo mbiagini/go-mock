@@ -1,8 +1,9 @@
 package main
 
 import (
-	"errors"
+	"go-mock/apierrors"
 	"go-mock/controller"
+	"go-mock/db"
 	"go-mock/model"
 	"net/http"
 
@@ -19,15 +20,36 @@ import (
 func Routes(r *chi.Mux, quit chan interface{}) {
 	addUserRoutes(r)
 	addServerRoutes(r, quit)
+	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
+		gsrender.WriteJSON(w, http.StatusNotFound, apierrors.New(apierrors.OPERATION_NOT_DEFINED))
+	})
 }
 
 func addServerRoutes(r *chi.Mux, quit chan interface{}) {
 
 	gslog.Server("Initializing server routes")
 
-	// Enables the programatically shutdown of the server.
-	r.MethodFunc("POST", "/shutdown", func(w http.ResponseWriter, r *http.Request) {
-		close(quit)
+	r.Route("/go-mock/v1", func(r chi.Router) {
+
+		r.Post("/restart", func(w http.ResponseWriter, r *http.Request) {
+			close(quit)
+		})
+
+		r.Route("/endpoints", func(r chi.Router) {
+			r.Get("/", controller.GetEndpoints)
+			r.Get("/{id}", controller.GetEndpointById)
+			r.Post("/", controller.PostEndpoint)
+			r.Put("/{id}", controller.UpdateEndpoint)
+			r.Delete("/{id}", controller.DeleteEndpoint)
+		})
+
+		r.Route("/files", func(r chi.Router) {
+			r.Get("/", controller.GetAllFiles)
+			r.Post("/", func(w http.ResponseWriter, r *http.Request) {
+				controller.PostFiles(w, r, Conf.UploadMaxSize)
+			})
+		})
+
 	})
 
 }
@@ -39,13 +61,9 @@ func addUserRoutes(r *chi.Mux) {
 	// All routes will begin with the server basepath.
 	r.Route(Conf.Basepath, func(r chi.Router) {
 
-		for _, e := range Conf.Endpoints {
+		for _, e := range db.DB.FindAll() {
 			r.MethodFunc(string(e.Method), e.Path, addRoute(e))
 		}
-
-		r.NotFound(func(w http.ResponseWriter, r *http.Request) {
-			gsrender.WriteJSON(w, http.StatusNotFound, model.ErrorFrom(errors.New("operation not found")))
-		})
 
 	})
 

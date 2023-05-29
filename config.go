@@ -3,22 +3,27 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"go-mock/model"
+	"go-mock/db"
 	"os"
 
 	"github.com/mbiagini/go-server-utils/gslog"
 )
 
 type Config struct {
-	Ip        string               `json:"ip"`
-	Port      int                  `json:"port"`
-	Basepath  string               `json:"basepath"`
-	Logger    *gslog.LoggerConfig  `json:"logger"`
-	LogFile   gslog.LogFileConfig `json:"log_file"`
-	Endpoints []model.Endpoint     `json:"endpoints"`
+	Ip            string              `json:"ip"`
+	Port          int                 `json:"port"`
+	Basepath      string              `json:"basepath"`
+	UploadMaxSize int                 `json:"file_max_size"` 
+	Logger        *gslog.LoggerConfig `json:"logger,omitempty"`
+	LogFile       gslog.LogFileConfig `json:"log_file"`
 }
 
 var Conf Config
+
+func (c *Config) ToString() string {
+	json, _ := json.Marshal(c)
+	return string(json)
+}
 
 func LoadConfiguration(f string) error {
 
@@ -27,6 +32,7 @@ func LoadConfiguration(f string) error {
 		Ip: "",
 		Port:     8080,
 		Basepath: "/",
+		UploadMaxSize: 1,
 	}
 
 	// Open config file.
@@ -50,6 +56,13 @@ func LoadConfiguration(f string) error {
 
 	// Set global variable.
 	Conf = config
+
+	err = db.LoadDB()
+	if err != nil {
+		return fmt.Errorf("error loading DB: %s", err.Error())
+	}
+
+	gslog.Server(fmt.Sprintf("config: %s", config.ToString()))
 
 	return nil
 }
