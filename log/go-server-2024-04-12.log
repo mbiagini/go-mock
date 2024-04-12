@@ -1,0 +1,33 @@
+[server/2024-04-12T19:35:40.656] Initializing routes
+[server/2024-04-12T19:35:40.657] Initializing user defined routes
+[server/2024-04-12T19:35:40.657] Initializing server routes
+[server/2024-04-12T19:35:40.657] Printing routes
+[server/2024-04-12T19:35:40.657] [POST]: '/go-mock/v1/soap'
+[server/2024-04-12T19:35:40.657] [POST]: '/go-mock/v1/users'
+[server/2024-04-12T19:35:40.657] [GET]: '/go-mock/v1/users'
+[server/2024-04-12T19:35:40.657] [GET]: '/go-mock/v1/users/{id}'
+[server/2024-04-12T19:35:40.657] [POST]: '/shutdown'
+[server/2024-04-12T19:35:40.657] Starting server
+[server/2024-04-12T19:49:28.056] Initializing routes
+[server/2024-04-12T19:49:28.057] Initializing user defined routes
+[server/2024-04-12T19:49:28.057] Initializing server routes
+[server/2024-04-12T19:49:28.057] Printing routes
+[server/2024-04-12T19:49:28.057] [POST]: '/go-mock/v1/soap'
+[server/2024-04-12T19:49:28.057] [POST]: '/go-mock/v1/users'
+[server/2024-04-12T19:49:28.057] [GET]: '/go-mock/v1/users'
+[server/2024-04-12T19:49:28.057] [GET]: '/go-mock/v1/users/{id}'
+[server/2024-04-12T19:49:28.057] [POST]: '/shutdown'
+[server/2024-04-12T19:49:28.057] Starting server
+[server/2024-04-12T20:03:29.629] Setting middlewares
+[server/2024-04-12T20:03:29.629] Initializing routes
+[server/2024-04-12T20:03:29.629] Initializing user defined routes
+[server/2024-04-12T20:03:29.629] Initializing server routes
+[server/2024-04-12T20:03:29.629] Printing routes
+[server/2024-04-12T20:03:29.629] [POST]: '/go-mock/v1/soap'
+[server/2024-04-12T20:03:29.629] [GET]: '/go-mock/v1/users'
+[server/2024-04-12T20:03:29.629] [POST]: '/go-mock/v1/users'
+[server/2024-04-12T20:03:29.629] [GET]: '/go-mock/v1/users/{id}'
+[server/2024-04-12T20:03:29.629] [POST]: '/shutdown'
+[server/2024-04-12T20:03:29.629] Starting server
+[dleware/http_log_handler.go:16] {"time":"2024-04-12T20:03:35.033","trace_id":"0850b9c6-4d23-4fe0-8281-2c62e2e35d4f","level":"INFO","type":"OUTER_REQUEST","method":"GET","url":"/go-mock/v1/users","headers":{"Accept":["*/*"],"User-Agent":["curl/8.6.0"],"X-Trace-Id":["0850b9c6-4d23-4fe0-8281-2c62e2e35d4f"]}}
+[dleware/http_log_handler.go:26] {"time":"2024-04-12T20:03:35.034","trace_id":"0850b9c6-4d23-4fe0-8281-2c62e2e35d4f","level":"INFO","type":"OUTER_RESPONSE","method":"GET","url":"/go-mock/v1/users","status":500,"headers":{"Content-Type":["application/json"],"X-Trace-Id":["0850b9c6-4d23-4fe0-8281-2c62e2e35d4f"]},"body":"{\"message\":\"discriminator parameter with_error not found in location QUERY\"}"}

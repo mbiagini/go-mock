@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/mbiagini/go-server-utils/gslog"
+	"github.com/mbiagini/go-server-utils/gsmiddleware"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -51,6 +52,9 @@ func main() {
 func startServer(wg *sync.WaitGroup, quit chan interface{}) *http.Server {
 
 	r := chi.NewRouter()
+	gslog.Server("Setting middlewares")
+	r.Use(gsmiddleware.TraceID)
+	r.Use(gsmiddleware.HttpLogHandler)
 
 	// Initialize routes.
 	gslog.Server("Initializing routes")

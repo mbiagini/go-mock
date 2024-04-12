@@ -2,6 +2,14 @@
   "ip": "",
   "port": 8081,
   "basepath": "/go-mock/v1",
+  "logger": {
+    "exclude_urls": ["/metrics"]
+  },
+  "log_file": {
+    "max_size": 1,
+    "max_backups": 5,
+    "max_age": 5
+  },
   "endpoints": [
     {
       "method": "POST",
